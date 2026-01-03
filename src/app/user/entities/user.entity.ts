@@ -22,7 +22,7 @@ export class User {
   @Column()
   @Exclude()
   password: string;
-  @Column({ type: 'enum', enum: UserType, default: UserType.CLIENT })
+  @Column({ type: 'enum', enum: UserType, default: UserType.GUARD })
   role: UserType;
   @CreateDateColumn({ type: 'timestamp', default: () => CURRENT_TIMESTAMP })
   createdAt: Date;

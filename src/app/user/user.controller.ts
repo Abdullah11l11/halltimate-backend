@@ -16,7 +16,7 @@ import { Login, Register } from './dto/create-user.dto';
 import { AuthGuard } from './guard/auth.guard';
 import { AuthRolesGuard } from './guard/auth-roles.guard';
 import { Roles } from './decorator/user-role.decorator';
-import { UserType } from 'src/shared/utils/enum';
+import { STAFF_ROLES, UserType } from 'src/shared/utils/enum';
 import { CurrentUser } from './decorator/current-user.decorator';
 import { JwtPayloadType } from 'src/shared/utils/types';
 import { UpdateInfoUser } from './dto/update-user.dto';
@@ -54,7 +54,7 @@ export class UserController {
   }
 
   @Put('/update-user/me')
-  @Roles(UserType.ADMIN, UserType.CLIENT)
+  @Roles(...STAFF_ROLES)
   @UseGuards(AuthRolesGuard)
   public updateUserForMe(
     @CurrentUser() payload: JwtPayloadType,
@@ -73,7 +73,7 @@ export class UserController {
   }
 
   @Delete('/delete-user/:id')
-  @Roles(UserType.ADMIN, UserType.CLIENT)
+  @Roles(...STAFF_ROLES)
   @UseGuards(AuthRolesGuard)
   public deleteUser(
     @Param('id', ParseIntPipe) id: string,

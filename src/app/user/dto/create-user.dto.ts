@@ -28,7 +28,10 @@ export class Register {
   @IsNotEmpty()
   password: string;
   @IsOptional()
-  @IsEnum(UserType, { message: 'userType must be one of: admin or client' })
+  @IsEnum(UserType, {
+    message:
+      'role must be one of: admin, warden, guard, medical, case_manager, visitor_officer, clerk',
+  })
   role?: UserType;
 }
 
